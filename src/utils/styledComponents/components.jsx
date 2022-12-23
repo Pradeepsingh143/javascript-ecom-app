@@ -22,7 +22,7 @@ export const Button = styled.button(
     border: (border || ''),
     borderRadius: (borderRadius || '4px'),
     fontSize: (size || ''),
-    width: (width || '100px'),
+    width: (width || 'auto'),
     height: (height || '40px'),
     fontFamily: (fontFamily || ''),
     "&:hover": {

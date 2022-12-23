@@ -1,9 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { FaShopware } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
+import { Link } from "react-router-dom";
+import MiniCart from "./MiniCart";
 
 const Header = () => {
+
+  const [isActive, setIsActive] = useState(false)
+
+  const toggleCart = () => {
+    setIsActive(!isActive)
+    if (!isActive) {
+        const miniCart = document.getElementById("miniCart");
+        miniCart.classList.add("overlay")
+    }else{
+      const miniCart = document.getElementById("miniCart");
+        miniCart.classList.remove("overlay")
+    }
+  }
+
+
   return (
     <header className="py-4 bg-primary">
       <div className="navbar mx-4">
@@ -23,15 +40,15 @@ const Header = () => {
             <button></button>
           </div>
 
-          <div className="flex gap-8 sm:gap-14 items-center">
+          <div className="flex gap-8 sm:gap-14 items-center relative">
             {/* main menu */}
             <nav className="navMainMenu list-none uppercase gap-1 hidden sm:flex">
-              <li className="bg-black px-10 py-1 rounded text-white text-sm cursor-pointer">
+              <Link to={'/'} className="bg-black px-10 py-1 rounded text-white text-sm cursor-pointer">
                 Home
-              </li>
-              <li className="bg-black px-10 py-1 rounded text-white text-sm cursor-pointer">
+              </Link>
+              <Link to={'/shop'} className="bg-black px-10 py-1 rounded text-white text-sm cursor-pointer">
                 Shop
-              </li>
+              </Link>
             </nav>
 
             {/* mobile hamburger menu  */}
@@ -47,13 +64,18 @@ const Header = () => {
 
             {/* cart icon */}
             <div className="menuIcon relative">
-              <h2 className="cursor-pointer">
-                <BsFillCartCheckFill size={"24px"} />
+            <button onClick={toggleCart}>
+            <h2 className="cursor-pointer">
+                <BsFillCartCheckFill size={"24px"}/>
               </h2>
               <p className="bg-white rounded-full text-center text-xs absolute bottom-4 left-3 w-4">
                 2
               </p>
+            </button>
             </div>
+            <div className="absolute top-8 right-0 z-10" id="miniCart">
+              {isActive ? <MiniCart toggleCart={toggleCart}/> : ""}
+              </div>
           </div>
         </div>
       </div>

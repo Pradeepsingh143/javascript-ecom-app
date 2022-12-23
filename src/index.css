@@ -48,3 +48,36 @@ code {
   right: 0;
 }
 
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+
+  .realtiveProductSubTitle{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    word-break:normal;
+    -webkit-box-orient: vertical;
+  }
+
+.overlay::before{
+  content: "";
+  position: fixed;
+  background-color: var(--black);
+  filter: blur(1px);
+  opacity: .6;
+  background-attachment: fixed;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}

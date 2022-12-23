@@ -6,7 +6,7 @@ import {
   Paragraph,
 } from "../utils/styledComponents/components";
 import img from "../images/demoimg.jpg";
-import ProdcuctCard from "../components/ProdcuctCard";
+import ProdcuctCard from "../components/ProductCard";
 
 const Home = () => {
   return (
