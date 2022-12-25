@@ -7,8 +7,12 @@ import {
 } from "../utils/styledComponents/components";
 import img from "../images/demoimg.jpg";
 import ProdcuctCard from "../components/ProductCard";
+import { useProduct } from "../context/Product.state";
 
 const Home = () => {
+
+  const productData = useProduct()
+
   return (
     <>
       {/* homepage page */}
@@ -119,7 +123,7 @@ const Home = () => {
                 praesentium totam in, ullam unde odio quasi autem amet eius
                 numquam suscipit laudantium.
               </Paragraph>
-              <Button className="mt-6" width={'140px'}>Contact</Button>
+              <Button className="mt-6" width={'140px'} bgColor={'var(--black)'}>Contact</Button>
             </div>
           </div>
         </section>
@@ -130,13 +134,13 @@ const Home = () => {
           <div className="container mx-auto min-h-[460px] flex flex-col justify-center">
             <Heading fontSize={'32px'} className="capitalize text-center">our products</Heading>
             <div className="product flex flex-wrap gap-4 justify-evenly mt-5">
-              <ProdcuctCard />
-              <ProdcuctCard />
-              <ProdcuctCard />
-              <ProdcuctCard />
+              {productData && productData.map((data)=>(
+                <ProdcuctCard title={data.title} category={data.category} price={data.price} image={data.img_url}/>
+              ))}
             </div>
           </div>
         </section>
+
       </main>
     </>
   );

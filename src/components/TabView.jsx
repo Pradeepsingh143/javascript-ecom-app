@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { SubHeading, Paragraph } from "../utils/styledComponents/components";
 
-const TabView = ({ tabs = {} }) => {
-  const [activeTabIndex, setActiveTabIndex] = useState(0);
+const TabView = ({ tabs }) => {
+  const [activeTabIndex, setActiveTabIndex] = useState(0); // intializing state for active tab index
 
   const activeTab = (index) => {
     setActiveTabIndex(index);

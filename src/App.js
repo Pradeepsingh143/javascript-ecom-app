@@ -8,6 +8,7 @@ import SingleProduct from "./pages/SingleProduct";
 import Shop from "./pages/Shop";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import ProductProvider from "./context/Product.state";
 
 
 const Layout = () =>(
@@ -32,7 +33,7 @@ const Router = createBrowserRouter([
         element: <Shop />
       },
       {
-        path : "/productPage/:productId/",
+        path : "/productPage/:id/",
         element : <SingleProduct />
       },
       {
@@ -49,7 +50,9 @@ const Router = createBrowserRouter([
 
 function App() {
   return (
-    <RouterProvider router={Router} />
+    <ProductProvider>
+       <RouterProvider router={Router} />
+    </ProductProvider>
   );
 }
 

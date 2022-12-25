@@ -13,7 +13,7 @@ const Shop = () => {
     
   return (
     <>
-    <div className='mx-auto w-full h-[400px]'>
+    <div className='mx-auto w-full h-[220px] sm:h-[280px] lg:h-[340px] xl:h-[400px]'>
     <ImageSlider slides={slides}/>
     </div>
     <div className="products container mx-auto my-12">
