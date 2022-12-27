@@ -1,5 +1,4 @@
 import React from "react";
-import img from "../images/demoimg.jpg";
 import RelativeProductCard from "../components/RelativeProductCard";
 import { useParams } from "react-router-dom";
 
@@ -10,15 +9,40 @@ import {
   Paragraph,
 } from "../utils/styledComponents/components";
 import TabView from "../components/TabView";
-import { useProduct } from "../context/Product.state";
+import { useProduct, useCart } from "../context/Product.state";
+import PopupMessage from "../components/PopupMessage";
 
 const SingleProduct = () => {
-  const productData = useProduct();
+  const productData = useProduct(); // use product context
+  const cart = useCart(); // use cart context
+ 
+   // getting id from params
   const { id } = useParams();
+
+   // filtering single product using filter method
   const product = productData.filter(
     (productData) => productData.id === Number(id)
   );
+
+   // assign product data to data variable
   const data = product[0];
+
+   // filtering relative products by category
+  const relativeProduct = productData.filter(
+    (productData) =>
+      productData.category === data.category && productData.id !== data.id
+  );
+
+  // adding cart items using add cart items context api function
+  function addItemToCart(id) {
+    try {
+      cart.addCartItem(id); // adding items to cart based on the product id
+      cart.setPopupIsActive(true);
+    } catch (error) {
+      cart.setPopupIsActive(true);
+      console.log(error);
+    }
+   }
 
   return (
     <>
@@ -30,9 +54,22 @@ const SingleProduct = () => {
             <div className="container flex gap-10 mx-auto items-center">
               {/* left column */}
               <div className="left w-1/2 flex justify-start">
-                <div className="images grid grid-cols-2 gap-2 w-full">
-                  <img src={img} alt="" className=" object-cover rounded" />
-                  <img src={img} alt="" className=" object-cover rounded" />
+              <img
+                    src={data.img_url}
+                    alt=""
+                    className="w-full object-cover rounded"
+                  />
+                {/* <div className="images grid grid-cols-2 gap-2 w-full">
+                  <img
+                    src={img}
+                    alt=""
+                    className="w-full object-cover rounded"
+                  />
+                  <img
+                    src={img}
+                    alt=""
+                    className="w-full object-cover rounded"
+                  />
                   <div className="col-span-2">
                     <img
                       src={img}
@@ -40,7 +77,7 @@ const SingleProduct = () => {
                       className="w-full h-40 object-cover rounded"
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
               {/* right cloumn */}
               <div className="right w-1/2">
@@ -70,9 +107,13 @@ const SingleProduct = () => {
                 </Paragraph>
 
                 {/* product Price  */}
-                <h4 className="text-white my-5">
+                <h4 className="text-white mt-5">
                   <strong>Price: </strong>
                   {data.price}$
+                </h4>
+                <h4 className="text-white mb-5">
+                  <strong>Category: </strong>
+                  {data.category}
                 </h4>
 
                 {/* Add to Cart Button */}
@@ -83,6 +124,7 @@ const SingleProduct = () => {
                   width="8em"
                   height="2.4em"
                   borderRadius="5px"
+                  onClick={()=>addItemToCart(data.id)}
                 >
                   Add To Cart
                 </Button>
@@ -95,22 +137,18 @@ const SingleProduct = () => {
             <div className="container mx-auto px-4">
               <SubHeading className="mb-5"> Product Details </SubHeading>
               <TabView
-                title={"Product Specification"}
                 tabs={[
                   {
                     name: "Specification",
-                    content:
-                      "Lorem ipsum has no intelligible meaning. It is simply a display of letters to be viewed as a sample with given graphical elements in a file.",
+                    content: `${data.specification}`,
                   },
                   {
                     name: "Details",
-                    content:
-                      "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content",
+                    content: `${data.details}`,
                   },
                   {
                     name: "Features",
-                    content:
-                      "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content",
+                    content: `${data.features}`,
                   },
                 ]}
               />
@@ -122,37 +160,29 @@ const SingleProduct = () => {
           <section className="relative-products">
             <div className="container mx-auto px-4 my-10">
               <SubHeading>Relative Products</SubHeading>
-              <div className="product-list flex flex-wrap gap-4 mt-4 justify-between">
-                <RelativeProductCard
-                  title={"demo product card"}
-                  subTitle={
-                    "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content."
-                  }
-                />
-
-                <RelativeProductCard
-                  title={"demo product card"}
-                  subTitle={
-                    "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content."
-                  }
-                />
-
-                <RelativeProductCard
-                  title={"demo product card"}
-                  subTitle={
-                    "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content."
-                  }
-                />
-
-                <RelativeProductCard
-                  title={"demo product card"}
-                  subTitle={
-                    "Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content."
-                  }
-                />
-              </div>
+              {relativeProduct.length === 0 ? (
+                <>
+                  <h3>No more Products</h3>
+                </>
+              ) : (
+                <>
+                  <div className="product-list flex flex-col sm:flex-row flex-wrap gap-6 mt-4">
+                    {relativeProduct &&
+                      relativeProduct.map((data) => (
+                        <RelativeProductCard
+                          key={data.id}
+                          productId={data.id}
+                          image={data.img_url}
+                          title={data.title}
+                          subTitle={data.shortdescription}
+                        />
+                      ))}
+                  </div>
+                </>
+              )}
             </div>
           </section>
+          {cart.message && cart.message.message !== "" ? <PopupMessage /> : ""}
         </>
       ) : (
         <section>

@@ -1,14 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { FaShopware } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { Link } from "react-router-dom";
 import MiniCart from "./MiniCart";
+import { useCart } from "../context/Product.state";
 
 const Header = () => {
-
+  const {cartItems} = useCart();
   const [isActive, setIsActive] = useState(false)
-
+  
   const toggleCart = () => {
     setIsActive(!isActive)
     if (!isActive) {
@@ -20,14 +21,13 @@ const Header = () => {
     }
   }
 
-
   return (
     <header className="py-4 bg-primary">
       <div className="navbar mx-4">
         <div className="container mx-auto flex items-center justify-between">
           {/* website logo */}
           <div className="logo">
-            <FaShopware size={"36px"} color={"white"} />
+            <Link to={'/'}><FaShopware size={"36px"} color={"white"} /></Link>
           </div>
 
           {/* search input bar */}
@@ -69,7 +69,7 @@ const Header = () => {
                 <BsFillCartCheckFill size={"24px"}/>
               </h2>
               <p className="bg-white rounded-full text-center text-xs absolute bottom-4 left-3 w-4">
-                2
+                {cartItems.length}
               </p>
             </button>
             </div>

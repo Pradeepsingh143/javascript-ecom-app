@@ -10,8 +10,7 @@ import ProdcuctCard from "../components/ProductCard";
 import { useProduct } from "../context/Product.state";
 
 const Home = () => {
-
-  const productData = useProduct()
+  const productData = useProduct(); 
 
   return (
     <>
@@ -110,11 +109,28 @@ const Home = () => {
           {/* About us container */}
           <div className="container flex flex-col md:flex-row mx-auto px-4 gap-6 md:gap-16 mt-5 md:mt-14 items-center">
             <div className="left-col w-full md:w-1/2">
-              <img src={img} alt="" className="w-full md:h-[380px] object-cover"/>
+              <img
+                src={img}
+                alt=""
+                className="w-full md:h-[380px] object-cover"
+              />
             </div>
             <div className="right-col  w-full md:w-1/2">
-              <Heading className="mb-3 md:mb-5" fontSize={'18px'} fontStyle={'italic'} fontWeight={'500'} textDecoration={'underline'} opacity={'.7'}>About Us</Heading>
-              <SubHeading fontSize={'32px'} fontWeight={'600'} letterSpacing={'1px'}>
+              <Heading
+                className="mb-3 md:mb-5"
+                fontSize={"18px"}
+                fontStyle={"italic"}
+                fontWeight={"500"}
+                textDecoration={"underline"}
+                opacity={".7"}
+              >
+                About Us
+              </Heading>
+              <SubHeading
+                fontSize={"32px"}
+                fontWeight={"600"}
+                letterSpacing={"1px"}
+              >
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               </SubHeading>
               <Paragraph className="mt-4 md:mt-7">
@@ -123,7 +139,9 @@ const Home = () => {
                 praesentium totam in, ullam unde odio quasi autem amet eius
                 numquam suscipit laudantium.
               </Paragraph>
-              <Button className="mt-6" width={'140px'} bgColor={'var(--black)'}>Contact</Button>
+              <Button className="mt-6" width={"140px"} bgColor={"var(--black)"}>
+                Contact
+              </Button>
             </div>
           </div>
         </section>
@@ -131,16 +149,27 @@ const Home = () => {
         {/* product section 
         # section-3 */}
         <section className="productSection bg-white">
-          <div className="container mx-auto min-h-[460px] flex flex-col justify-center">
-            <Heading fontSize={'32px'} className="capitalize text-center">our products</Heading>
-            <div className="product flex flex-wrap gap-4 justify-evenly mt-5">
-              {productData && productData.map((data)=>(
-                <ProdcuctCard title={data.title} category={data.category} price={data.price} image={data.img_url}/>
-              ))}
+          <div className="container mx-auto flex flex-col justify-center py-14">
+            <Heading fontSize={"32px"} className="capitalize text-center">
+              our products
+            </Heading>
+            <div className="product flex flex-wrap gap-8 justify-start mt-5">
+              {productData &&
+                productData
+                  .filter((_data, index) => index < 4)
+                  .map((data, index) => (
+                    <ProdcuctCard
+                      key={index}
+                      title={data.title}
+                      category={data.category}
+                      price={data.price}
+                      image={data.img_url}
+                      productId={data.id}
+                    />
+                  ))}
             </div>
           </div>
         </section>
-
       </main>
     </>
   );

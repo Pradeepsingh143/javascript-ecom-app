@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useCart } from "../context/Product.state";
 
 const MiniCart = ({ toggleCart }) => {
+
+  const {cartItems, removeCartItem} = useCart()
+
+
   return (
     <>
       <div
@@ -34,21 +39,24 @@ const MiniCart = ({ toggleCart }) => {
 
         <div className="mt-6 space-y-6">
           <ul className="space-y-4">
-            <li className="flex items-center">
-              <img
-                src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80"
+          {!(cartItems.length === 0) ?
+          (<>
+          {cartItems && cartItems.map((item, index)=>(
+              <li className="flex items-center" key={index}>
+              <Link to={`/productpage/${item.id}`} onClick={toggleCart}><img
+                src={item.img_url}
                 alt=""
                 className="object-cover w-16 h-16 border-2 border-black rounded"
               />
+              </Link>
 
               <div className="ml-4">
-                <h3 className="text-sm">Basic Tee 6-Pack</h3>
+                <h3 className="text-sm"><Link to={`/productpage/${item.id}`} onClick={toggleCart}>{item.title}</Link></h3>
 
                 <dl className="mt-0.5 space-y-px text-[10px] text-black/75">
                   <div>
                     <dt className="overflow-ellipsis overflow-hidden whitespace-nowrap max-w-[145px]">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Distinctio, ipsam?
+                     {item.shortdescription}
                     </dt>
                   </div>
                 </dl>
@@ -70,7 +78,9 @@ const MiniCart = ({ toggleCart }) => {
                   />
                 </form>
 
-                <button className="transition hover:text-red-600">
+                <button className="transition hover:text-red-600"
+                onClick={()=>removeCartItem(item.id)}
+                >
                   <span className="sr-only">Remove item</span>
 
                   <svg
@@ -90,6 +100,11 @@ const MiniCart = ({ toggleCart }) => {
                 </button>
               </div>
             </li>
+          ))}
+          </>)
+          : (<>
+          <h3>Cart is empty please add products to cart</h3>
+          </>)}
           </ul>
 
           <div className="space-y-4 text-center">
@@ -98,7 +113,7 @@ const MiniCart = ({ toggleCart }) => {
               onClick={toggleCart}
               className="block rounded-full border-2 border-black px-5 py-3 text-sm shadow-[0_4px_0_0] shadow-black transition hover:ring-1 hover:ring-black"
             >
-              View my cart (2)
+              View my cart ({cartItems.length})
             </Link>
 
             <Link

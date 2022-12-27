@@ -1,72 +1,81 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "../utils/styledComponents/components";
+import { useCart } from "../context/Product.state";
+import { Button, Paragraph } from "../utils/styledComponents/components";
+import {AiOutlineShoppingCart} from "react-icons/ai"
 
 const Cart = () => {
+  const cart = useCart();
+
   return (
     <>
+    {cart.cartItems.length !== 0 ? (
       <section className="bg-white">
         <div className="max-w-screen-xl min-h-screen px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <div className="max-w-3xl mx-auto">
             <div className="mt-8">
               <ul className="space-y-4">
-                <li className="flex items-center">
-                  <img
-                    src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=830&q=80"
-                    alt=""
-                    className="object-cover w-16 h-16 rounded"
-                  />
-
-                  <div className="ml-4">
-                    <h3 className="text-sm">Basic Tee 6-Pack</h3>
-
-                    <dl className="mt-0.5 space-y-px text-[10px] text-black/75">
-                      <div>
-                        <dt className="overflow-ellipsis overflow-hidden whitespace-nowrap max-w-[120px] sm:max-w-[140px]">
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Distinctio, ipsam?
-                        </dt>
-                      </div>
-                    </dl>
-                  </div>
-
-                  <div className="flex items-center justify-end flex-1 gap-2">
-                    <form>
-                      <label htmlFor="Line1Qty" className="sr-only">
-                        {" "}
-                        Quantity{" "}
-                      </label>
-
-                      <input
-                        type="number"
-                        min="1"
-                        max="10"
-                        defaultValue="1"
-                        id="Line1Qty"
-                        className="h-8 w-12 rounded border-black] bg-[#fff] p-0 text-center text-xs text-black [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                {cart &&
+                  cart.cartItems.map((item, index) => (
+                    <li key={index} className="flex items-center pr-2">
+                      <img
+                        src={`${item.img_url}`}
+                        alt=""
+                        className="object-cover w-10 h-10 sm:w-16 sm:h-16 rounded"
                       />
-                    </form>
 
-                    <button className="text-gray-600 transition hover:text-red-600">
-                      <span className="sr-only">Remove item</span>
+                      <div className="ml-2 sm:ml-4">
+                        <h3 className="text-xs sm:text-sm overflow-ellipsis overflow-hidden whitespace-nowrap max-w-[80px] sm:max-w-[160px]">{item.title}</h3>
 
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="w-4 h-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
-                        />
-                      </svg>
-                    </button>
-                  </div>
-                </li>
+                        <dl className="mt-0.5 space-y-px text-[10px] text-black/75">
+                          <div>
+                            <dt className="overflow-ellipsis overflow-hidden whitespace-nowrap max-w-[120px] sm:max-w-[140px]">
+                              <Paragraph fontSize={'10px'} className={"hidden sm:flex overflow-ellipsis overflow-hidden whitespace-nowrap max-w-[160px]"}>{item.shortdescription}</Paragraph>
+                            </dt>
+                          </div>
+                        </dl>
+                      </div>
+                      <div className="flex items-center justify-end flex-1 gap-2">
+                        <div className="mr-1 sm:mr-8"><p className="text-[12px] sm:text-[14px]"><sup>$</sup>{item.price}</p></div>
+                        <form>
+                          <label htmlFor="Line1Qty" className="sr-only">
+                            {" "}
+                            Quantity{" "}
+                          </label>
+
+                          <input
+                            type="number"
+                            min="1"
+                            max="10"
+                            defaultValue="1"
+                            id="Line1Qty"
+                            className="h-6 w-6 sm:h-8 sm:w-12 rounded border-black] bg-[#fff] p-0 text-center text-xs text-black [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                          />
+                        </form>
+
+                        <button className="text-gray-600 transition hover:text-red-600"
+                        onClick={()=>cart.removeCartItem(item.id)}
+                        >
+                          <span className="sr-only">Remove item</span>
+
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="currentColor"
+                            className="w-4 h-4"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+                    </li>
+                  ))}
               </ul>
 
               <div className="flex justify-end pt-8 mt-8 border-t border-black">
@@ -74,18 +83,32 @@ const Cart = () => {
                   <dl className="space-y-0.5 text-sm text-gray-700">
                     <div className="flex justify-between !text-base font-medium">
                       <dt>Total</dt>
-                      <dd>£200</dd>
+                      <dd>
+                        <sup>$</sup>{cart.cartItems.reduce(
+                          (total, price) =>
+                            total + price.price,
+                          0
+                        )}
+                      </dd>
                     </div>
                   </dl>
                   <div className="flex flex-col gap-2 justify-end">
                     {/* Update cart Button */}
-                    <Button  className="transition hover:opacity-90" bgColor={"var(--black)"} width={"100%"}>
+                    <Button
+                      className="transition hover:opacity-90"
+                      bgColor={"var(--black)"}
+                      width={"100%"}
+                    >
                       Update Cart
                     </Button>
 
                     {/* procced to checkout button */}
                     <Link to={"/checkout"}>
-                      <Button className="transition hover:opacity-90" bgColor={"var(--primary)"} width={"100%"}>
+                      <Button
+                        className="transition hover:opacity-90"
+                        bgColor={"var(--primary)"}
+                        width={"100%"}
+                      >
                         Procced To Checkout
                       </Button>
                     </Link>
@@ -103,6 +126,10 @@ const Cart = () => {
           </div>
         </div>
       </section>
+    ) : (<div className="text-center h-screen flex flex-col justify-center items-center gap-5">
+      <h2 className="text-xl">Nothing To preview please add some products in cart</h2>
+      <Link to={'/shop'}><Button color="var(--white)" bgColor={"var(--primary)"} width={"200px"} height={"50px"} className={"flex justify-center items-center gap-2 hover:opacity-90"}><span><AiOutlineShoppingCart/></span> Continue Shopping </Button></Link>
+      </div>)}
     </>
   );
 };

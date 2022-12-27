@@ -1,9 +1,13 @@
 import React from 'react'
 import ImageSlider from '../components/ImageSlider'
 import ProdcuctCard from '../components/ProductCard'
+import { useProduct } from '../context/Product.state'
 import { SubHeading } from '../utils/styledComponents/components'
 
 const Shop = () => {
+
+  const productData = useProduct()
+
     const slides = [
         {url: "https://cdn.pixabay.com/photo/2016/05/24/16/48/mountains-1412683_1280.png", title: "img title 1"},
         {url: "https://cdn.pixabay.com/photo/2017/01/19/23/46/church-1993645_1280.jpg", title: "sparrow in snowfall"},
@@ -18,7 +22,11 @@ const Shop = () => {
     </div>
     <div className="products container mx-auto my-12">
         <SubHeading className='capitalize mb-4'>Our Products</SubHeading>
-        <ProdcuctCard></ProdcuctCard>
+        <div className='flex flex-wrap gap-8'>
+        {productData && productData.map((data, index)=>(
+          <ProdcuctCard key={index} productId={data.id} title={data.title} price={data.price} category={data.category} image={data.img_url}></ProdcuctCard>
+        ))}
+        </div>
     </div>
     </>
   )
