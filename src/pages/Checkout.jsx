@@ -4,6 +4,7 @@ import { FaShopware } from "react-icons/fa";
 import { useCart } from "../context/Product.state";
 import { Link } from "react-router-dom";
 import {AiOutlineShoppingCart} from "react-icons/ai"
+import {CgPaypal} from "react-icons/cg"
 
 
 const Checkout = () => {
@@ -274,8 +275,8 @@ const Checkout = () => {
                 </fieldset>
 
                 <div className="col-span-6">
-                  <Button bgColor={"var(--primary)"} width={"100%"}>
-                    Pay Now
+                  <Button bgColor={"var(--black)"} width={"100%"} className={"flex justify-center items-center gap-2 hover:opacity-95"}>
+                    <CgPaypal/> Pay Now
                   </Button>
                 </div>
               </form>

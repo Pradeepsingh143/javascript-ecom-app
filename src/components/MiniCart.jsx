@@ -10,7 +10,7 @@ const MiniCart = ({ toggleCart }) => {
   return (
     <>
       <div
-        className="w-screen max-w-sm rounded-b-xl border-2 border-black bg-yellow-50 p-8 pt-4 shadow-[0_4px_0_0] shadow-black"
+        className="w-screen min-h-screen z-50 no-scrollbar sm:min-h-fit border-black bg-yellow-50 p-8 pt-4 sm:max-w-sm sm:rounded-b-xl sm:border-2 sm:shadow-[0_4px_0_0] sm:shadow-black"
         aria-modal="true"
         role="dialog"
         tabIndex="-1"
@@ -37,8 +37,8 @@ const MiniCart = ({ toggleCart }) => {
           </svg>
         </button>
 
-        <div className="mt-6 space-y-6">
-          <ul className="space-y-4">
+        <div className="mt-6 min-h-[88vh] sm:min-h-fit overflow-y-scroll no-scrollbar space-y-6 flex flex-col justify-between">
+          <ul className="space-y-4 h-[62vh] sm:h-auto no-scrollbar overflow-y-scroll">
           {!(cartItems.length === 0) ?
           (<>
           {cartItems && cartItems.map((item, index)=>(

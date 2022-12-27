@@ -73,7 +73,7 @@ const Header = () => {
               </p>
             </button>
             </div>
-            <div className="absolute top-8 right-0 z-10" id="miniCart">
+            <div className="fixed top-0 sm:absolute  sm:top-8 right-0 z-10" id="miniCart">
               {isActive ? <MiniCart toggleCart={toggleCart}/> : ""}
               </div>
           </div>
