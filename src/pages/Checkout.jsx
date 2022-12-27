@@ -275,7 +275,7 @@ const Checkout = () => {
                 </fieldset>
 
                 <div className="col-span-6">
-                  <Button bgColor={"var(--black)"} width={"100%"} className={"flex justify-center items-center gap-2 hover:opacity-95"}>
+                  <Button bgColor={"var(--black)"} height={"2.4em"} width={"100%"} className={"flex justify-center items-center gap-2 hover:opacity-95"}>
                     <CgPaypal/> Pay Now
                   </Button>
                 </div>

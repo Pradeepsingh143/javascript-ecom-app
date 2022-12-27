@@ -20,7 +20,7 @@ const ProductCard = ({ productId, title, category, price, image }) => {
   
 
   return (
-    <div className="productCard border-2 flex flex-col w-11/12 sm:w-[230px] rounded-md">
+    <div className="productCard border-2 flex flex-col w-full sm:w-[230px] rounded-md">
       <div className="productImg relative">
         <Link to={`/productPage/${productId}/`}>
           <img
@@ -30,8 +30,7 @@ const ProductCard = ({ productId, title, category, price, image }) => {
           />
         </Link>
         <BsFillCartPlusFill
-          fontSize={"24px"}
-          className="absolute -bottom-8 right-3 cursor-pointer hover:text-primary"
+          className="absolute -bottom-8 right-3 cursor-pointer hover:text-primary text-base sm:text-2xl"
           onClick={() => addItemToCart(productId)}
         />
       </div>
@@ -39,7 +38,7 @@ const ProductCard = ({ productId, title, category, price, image }) => {
         <h4 className="text-sm">{category || "category"}</h4>
         <h3 className="font-semibold text-xl">
           <Link to={`/productPage/${productId}/`}>
-            {title || "Product title"}
+            <h3 className="text-sm leading-6">{title || "Product title"}</h3>
           </Link>
         </h3>
         <h4 className="text-sm">

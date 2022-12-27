@@ -18,13 +18,12 @@ const Home = () => {
       <main className="homePage">
         {/* hero section*/}
         {/* # section 1 */}
-        <section className="heroSection min-h-[500px] bg-primary flex ">
-          <div className="container flex mx-auto items-center">
+        <section className="heroSection bg-primary">
+          <div className="container px-4 pt-12 pb-4 min-h-[90vh] flex flex-col gap-8 sm:flex-row mx-auto sm:items-center">
             {/* left cloumn */}
-            <div className="left w-1/2">
+            <div className="left w-full sm:w-1/2">
               <Heading
-                className="mb-1"
-                fontSize={"36px"}
+                className="mb-1 text-2xl sm:text-4xl"
                 color={"var(--white)"}
               >
                 Lorem ipsum dolor
@@ -33,6 +32,7 @@ const Home = () => {
                 fontStyle={"italic"}
                 color={"var(--white)"}
                 letterSpacing={"1px"}
+                className={"text-lg sm:text-xl"}
               >
                 <mark
                   style={{ background: "var(--black)", color: "var(--white)" }}
@@ -40,7 +40,7 @@ const Home = () => {
                   Lorem ipsum dolor sit, amet consectetur.
                 </mark>
               </SubHeading>
-              <Paragraph className="mt-4" color={"var(--white)"}>
+              <Paragraph className="mt-4 text-sm sm:text-base" color={"var(--white)"}>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi
                 obcaecati voluptas aut sint, culpa beatae ratione id maxime
                 debitis officiis.
@@ -50,12 +50,12 @@ const Home = () => {
                   color="var(--black)"
                   bgColor="var(--white)"
                   border="1px solid var(--white)"
-                  width="8em"
                   height="2.4em"
                   borderRadius="5px"
                   hoverBgColor="var(--primary)"
                   hoverColor="var(--white)"
                   hoverBorder="1px solid var(--white)"
+                  className="w-24 sm:w-32 text-sm sm:text-base"
                 >
                   Shop Now
                 </Button>
@@ -66,16 +66,17 @@ const Home = () => {
                   width="8em"
                   height="2.4em"
                   borderRadius="5px"
+                  className="w-24 sm:w-32 text-sm sm:text-base"
                 >
                   Contact Us
                 </Button>
               </div>
             </div>
             {/* right column */}
-            <div className="right w-1/2 flex justify-end">
-              <div className="images grid grid-cols-2 gap-2 w-4/5">
-                <img src={img} alt="" className="h-40 object-cover rounded" />
-                <img src={img} alt="" className="h-40 object-cover rounded" />
+            <div className="right w-full sm:w-1/2 flex justify-end">
+              <div className="images grid grid-cols-2 gap-2 w-full sm:w-4/5">
+                <img src={img} alt="" className="h-40 w-full object-cover rounded" />
+                <img src={img} alt="" className="h-40 w-full object-cover rounded" />
                 <div className="col-span-2">
                   <img
                     src={img}
@@ -95,7 +96,7 @@ const Home = () => {
           {/* About summary section */}
           <div className="container w-full md:w-8/12 mx-auto text-black">
             {/* sub heading div */}
-            <div className="aboutSummary flex flex-col text-center p-4 md:py-12 md:px-8 bg-[#fff] md:shadow-xl hover:md:shadow-2xl md:rounded-2xl relative md:bottom-12 gap-3">
+            <div className="aboutSummary flex flex-col text-center py-12 px-4 md:py-10 md:px-8 bg-[#fff] md:shadow-xl hover:md:shadow-2xl md:rounded-2xl relative md:bottom-12 gap-3">
               <SubHeading className="capitalize">Sub Heading</SubHeading>
               <Paragraph>
                 Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -127,19 +128,19 @@ const Home = () => {
                 About Us
               </Heading>
               <SubHeading
-                fontSize={"32px"}
                 fontWeight={"600"}
                 letterSpacing={"1px"}
+                className={"text-xl sm:text-2xl"}
               >
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.
               </SubHeading>
-              <Paragraph className="mt-4 md:mt-7">
+              <Paragraph className="mt-4 md:mt-7 text-sm sm:text-base">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
                 tempora deserunt laborum sint aliquam magni molestiae maxime,
                 praesentium totam in, ullam unde odio quasi autem amet eius
                 numquam suscipit laudantium.
               </Paragraph>
-              <Button className="mt-6" width={"140px"} bgColor={"var(--black)"}>
+              <Button className="mt-6 w-24 sm:w-32 text-sm sm:text-base" height={"2.4em"} width={"140px"} bgColor={"var(--black)"}>
                 Contact
               </Button>
             </div>
@@ -149,11 +150,11 @@ const Home = () => {
         {/* product section 
         # section-3 */}
         <section className="productSection bg-white">
-          <div className="container mx-auto flex flex-col justify-center py-14">
-            <Heading fontSize={"32px"} className="capitalize text-center">
+          <div className="container mx-auto flex flex-col justify-center pt-16 pb-8 px-4">
+            <Heading className="capitalize text-2xl sm:text-3xl">
               our products
             </Heading>
-            <div className="product flex flex-wrap gap-8 justify-start mt-5">
+            <div className="product mt-4 grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-4">
               {productData &&
                 productData
                   .filter((_data, index) => index < 4)

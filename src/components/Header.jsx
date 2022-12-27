@@ -9,6 +9,7 @@ import { useCart } from "../context/Product.state";
 const Header = () => {
   const {cartItems} = useCart();
   const [isActive, setIsActive] = useState(false)
+  const [isMenuActive, setIsMenuActive] = useState(false)
   
   const toggleCart = () => {
     setIsActive(!isActive)
@@ -23,8 +24,8 @@ const Header = () => {
 
   return (
     <header className="py-4 bg-primary">
-      <div className="navbar mx-4">
-        <div className="container mx-auto flex items-center justify-between">
+      <div className="navbar px-4">
+        <div className="container relative mx-auto flex items-center justify-between">
           {/* website logo */}
           <div className="logo">
             <Link to={'/'}><FaShopware size={"36px"} color={"white"} /></Link>
@@ -40,7 +41,7 @@ const Header = () => {
             <button></button>
           </div>
 
-          <div className="flex gap-8 sm:gap-14 items-center relative">
+          <div className="flex gap-8 sm:gap-14 items-center">
             {/* main menu */}
             <nav className="navMainMenu list-none uppercase gap-1 hidden sm:flex">
               <Link to={'/'} className="bg-black px-10 py-1 rounded text-white text-sm cursor-pointer">
@@ -52,14 +53,22 @@ const Header = () => {
             </nav>
 
             {/* mobile hamburger menu  */}
-            <nav className="mobileMainMenu flex sm:hidden">
-              {/* <li className="bg-black px-10 py-1 rounded text-white text-sm cursor-pointer">
+            <nav className="mobileMainMenu sm:hidden">
+              {isMenuActive ? (
+                <>
+               <div className="mobileMenu absolute bg-black w-full list-none rounded-lg shadow-sm shadow-white top-12 left-0 p-5 text-white z-50">
+               <ul className=" flex flex-col gap-4">
+               <Link to={'/'} className="text-white text-sm cursor-pointer" onClick={()=>setIsMenuActive(!isMenuActive)}>
                 Home
-              </li>
-              <li className="bg-black px-10 py-1 rounded text-white text-sm cursor-pointer">
+              </Link>
+              <Link to={'/shop'} className="text-white text-sm cursor-pointer" onClick={()=>setIsMenuActive(!isMenuActive)}>
                 Shop
-              </li> */}
-                <RxHamburgerMenu size={'1.3em'}/>
+              </Link>
+               </ul>
+               </div>
+                </>
+              ) : ("")}
+                <RxHamburgerMenu size={'1.3em'} onClick={()=>setIsMenuActive(!isMenuActive)}/>
             </nav>
 
             {/* cart icon */}

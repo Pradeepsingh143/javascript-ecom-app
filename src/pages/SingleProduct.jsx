@@ -50,45 +50,26 @@ const SingleProduct = () => {
         <>
           {/* hero section*/}
           {/* # section 1 */}
-          <section className="heroSection min-h-[500px] bg-primary flex ">
-            <div className="container flex gap-10 mx-auto items-center">
+          <section className="heroSection min-h-[500px] bg-primary flex px-4">
+            <div className="container flex flex-col sm:flex-row gap-4 sm:gap-10 mx-auto items-center pt-3 pb-8">
               {/* left column */}
-              <div className="left w-1/2 flex justify-start">
+              <div className="left w-full sm:w-1/2 flex justify-start">
               <img
                     src={data.img_url}
                     alt=""
                     className="w-full object-cover rounded"
                   />
-                {/* <div className="images grid grid-cols-2 gap-2 w-full">
-                  <img
-                    src={img}
-                    alt=""
-                    className="w-full object-cover rounded"
-                  />
-                  <img
-                    src={img}
-                    alt=""
-                    className="w-full object-cover rounded"
-                  />
-                  <div className="col-span-2">
-                    <img
-                      src={img}
-                      alt=""
-                      className="w-full h-40 object-cover rounded"
-                    />
-                  </div>
-                </div> */}
               </div>
               {/* right cloumn */}
-              <div className="right w-1/2">
+              <div className="right w-full sm:w-1/2">
                 <Heading
-                  className="mb-1"
-                  fontSize={"36px"}
+                  className="mb-1 text-2xl sm:text-3xl"
                   color={"var(--white)"}
                 >
                   {data.title}
                 </Heading>
                 <SubHeading
+                  className="text-lg sm:text-xl"
                   fontStyle={"italic"}
                   color={"var(--white)"}
                   letterSpacing={"1px"}

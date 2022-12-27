@@ -98,6 +98,7 @@ const Cart = () => {
                       className="transition hover:opacity-90"
                       bgColor={"var(--black)"}
                       width={"100%"}
+                      height={"2.4em"}
                     >
                       Update Cart
                     </Button>
@@ -108,6 +109,7 @@ const Cart = () => {
                         className="transition hover:opacity-90"
                         bgColor={"var(--primary)"}
                         width={"100%"}
+                        height={"2.4em"}
                       >
                         Procced To Checkout
                       </Button>

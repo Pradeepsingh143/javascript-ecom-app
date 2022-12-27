@@ -20,9 +20,9 @@ const Shop = () => {
     <div className='mx-auto w-full h-[220px] sm:h-[280px] lg:h-[340px] xl:h-[400px]'>
     <ImageSlider slides={slides}/>
     </div>
-    <div className="products container mx-auto my-12">
+    <div className="products container mx-auto px-4 my-12">
         <SubHeading className='capitalize mb-4'>Our Products</SubHeading>
-        <div className='flex flex-wrap gap-8'>
+        <div className='product mt-4 grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-4'>
         {productData && productData.map((data, index)=>(
           <ProdcuctCard key={index} productId={data.id} title={data.title} price={data.price} category={data.category} image={data.img_url}></ProdcuctCard>
         ))}

@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <footer className='bg-primary py-3'>
         <div className="container mx-auto">
-            <h2 className='text-center text-base text-white capitalize'>&#169; CopyRight {new Date().getFullYear()}. All rights are &#174;reserved by igniteshark</h2>
+            <h2 className='text-center text-xs sm:text-base px-4 text-white capitalize'>&#169; CopyRight {new Date().getFullYear()}. All rights are &#174;reserved by igniteshark</h2>
         </div>
     </footer>
   )
