@@ -178,10 +178,12 @@ const ProductProvider = ({ children }) => {
  async function removeCartItem(id) {
     const removedItems = cartItems.filter((item) => item.id !== id);
     const cartIndex = cartItems.findIndex((item)=> item.id === id);
+    console.log(cartIndex);
+    console.log(removedItems);
     setCartItems(removedItems);
     const cart = localStorage.getItem("cart");
     const cartArr = JSON.parse(cart);
-    cartArr.splice(cartArr[cartIndex], 1);
+    cartArr.splice(cartIndex, 1);
     localStorage.setItem("cart", JSON.stringify(cartArr));
     if (cartArr.length == 0) {
         localStorage.clear();
