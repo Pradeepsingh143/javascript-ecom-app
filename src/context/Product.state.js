@@ -14,6 +14,7 @@ const ProductProvider = ({ children }) => {
   const product = [
     {
       id: 101,
+      qty: 1,
       title: "Demo Product",
       price: 15,
       shortdescription: "This is product subheading",
@@ -29,6 +30,7 @@ const ProductProvider = ({ children }) => {
     },
     {
       id: 102,
+      qty: 1,
       title: "Demo Product",
       price: 45,
       shortdescription: "This is product subheading",
@@ -44,6 +46,7 @@ const ProductProvider = ({ children }) => {
     },
     {
       id: 103,
+      qty: 1,
       title: "Demo Product",
       price: 50,
       shortdescription: "This is product subheading",
@@ -59,6 +62,7 @@ const ProductProvider = ({ children }) => {
     },
     {
       id: 104,
+      qty: 1,
       title: "Demo Product",
       price: 30,
       shortdescription: "This is product subheading",
@@ -74,6 +78,7 @@ const ProductProvider = ({ children }) => {
     },
     {
       id: 105,
+      qty: 1,
       title: "Demo Product",
       price: 100,
       shortdescription: "This is product subheading",
@@ -89,6 +94,7 @@ const ProductProvider = ({ children }) => {
     },
     {
       id: 106,
+      qty: 1,
       title: "Demo Product",
       price: 130,
       shortdescription: "This is product subheading",
@@ -104,6 +110,7 @@ const ProductProvider = ({ children }) => {
     },
     {
       id: 107,
+      qty: 1,
       title: "Demo Product",
       price: 120,
       shortdescription: "This is product subheading",
@@ -144,20 +151,35 @@ const ProductProvider = ({ children }) => {
   }, []);
 
   // add to cart function for adding items in cart
-  function addCartItem(id) {
+  async function addCartItem(id) {
     let cart;
-    if (!cartItems.some((data) => data.id === id)) {
+    const existingItem = cartItems.some((data) => data.id === id); // check item in cartItems state is exist or not
+    const cartArr = localStorage.getItem("cart"); // fetch localStorage cart
+
+
+    if (!existingItem) {
+      // getting item to update our cartItems state
       const item = product.filter((data) => data.id === id)[0];
+
+      //set item in cartItems state
       setCartItems([...cartItems, item]);
-      const cartArr = localStorage.getItem("cart");
+
       if (cartArr == null) {
         cart = [];
       } else {
-        cart = JSON.parse(cartArr);
+        cart = await JSON.parse(cartArr);
       }
+
+      // asign new object if item not exist in cartItems
       const cartObj = new Object(item);
+
+      // push obj in cart variable initialized above
       cart.push(cartObj);
+
+      //set local storage
       localStorage.setItem("cart", JSON.stringify(cart));
+
+      //send success message
       setMessage({
         success: true,
         message: "Item Added Successfully",
@@ -165,19 +187,51 @@ const ProductProvider = ({ children }) => {
       });
       return cartItems;
     } else {
+
+      await updateItemQty(id); // passed updateItemQty function
       setMessage({
-        success: false,
-        message: "Item Already In Cart",
-        error: true,
+        success: true,
+        message: `Item Added Successfully`,
+        error: false,
       });
-      throw new Error("Items is already added in cart");
     }
   }
 
+  // update item quantity if item already exist in cart
+  async function updateItemQty(id, qty) {
+    let cart;
+    const cartArr = localStorage.getItem("cart"); // fetch localStorage cart
+    cart = await JSON.parse(cartArr);
+
+       //if item already exist in cartItem state
+       setCartItems((prevArray) => {
+        // map cartItem array
+        return prevArray.map((item) => {
+          if (item.id === id) {
+            return {
+              ...item,
+              qty: qty || item.qty + 1,
+            };
+          }
+          return item;
+        });
+      });
+
+      // changle local storage item qty
+    cartItems.map((item, index) => {
+      if (item.id === id) {
+        cart.splice(index, 1, { ...item, qty: qty || item.qty + 1});
+        //set local storage
+        localStorage.setItem("cart", JSON.stringify(cart));
+      }
+    });
+
+  }
+
   // remove cart item function for removing items from cart
- async function removeCartItem(id) {
+  async function removeCartItem(id) {
     const removedItems = cartItems.filter((item) => item.id !== id);
-    const cartIndex = cartItems.findIndex((item)=> item.id === id);
+    const cartIndex = cartItems.findIndex((item) => item.id === id);
     console.log(cartIndex);
     console.log(removedItems);
     setCartItems(removedItems);
@@ -186,7 +240,7 @@ const ProductProvider = ({ children }) => {
     cartArr.splice(cartIndex, 1);
     localStorage.setItem("cart", JSON.stringify(cartArr));
     if (cartArr.length == 0) {
-        localStorage.clear();
+      localStorage.clear();
     }
     setMessage({
       success: true,
@@ -201,6 +255,7 @@ const ProductProvider = ({ children }) => {
       <CartContext.Provider
         value={{
           cartItems,
+          updateItemQty,
           addCartItem,
           removeCartItem,
           message,

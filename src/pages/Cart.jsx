@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/Product.state";
 import { Button, Paragraph } from "../utils/styledComponents/components";
@@ -36,7 +36,7 @@ const Cart = () => {
                         </dl>
                       </div>
                       <div className="flex items-center justify-end flex-1 gap-2">
-                        <div className="mr-1 sm:mr-8"><p className="text-[12px] sm:text-[14px]"><sup>$</sup>{item.price}</p></div>
+                        <div className="mr-1 sm:mr-8"><p className="text-[12px] sm:text-[14px]"><sup>$</sup>{item.price * item.qty}</p></div>
                         <form>
                           <label htmlFor="Line1Qty" className="sr-only">
                             {" "}
@@ -46,10 +46,10 @@ const Cart = () => {
                           <input
                             type="number"
                             min="1"
-                            max="10"
-                            defaultValue="1"
-                            id="Line1Qty"
-                            className="h-6 w-6 sm:h-8 sm:w-12 rounded border-black] bg-[#fff] p-0 text-center text-xs text-black [-moz-appearance:_textfield] focus:outline-none [&::-webkit-outer-spin-button]:m-0 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0 [&::-webkit-inner-spin-button]:appearance-none"
+                            defaultValue={item.qty}
+                            id="Line1Qt"
+                            className="h-6 w-6 sm:h-8 sm:w-12 rounded border-black] bg-[#fff] p-0 text-center text-xs text-black"
+                            onChange={(e)=>cart.updateItemQty(item.id, e.target.value==="" ? (1) : (e.target.value))}
                           />
                         </form>
 
@@ -86,23 +86,13 @@ const Cart = () => {
                       <dd>
                         <sup>$</sup>{cart.cartItems.reduce(
                           (total, price) =>
-                            total + price.price,
+                            total + (price.price * price.qty),
                           0
                         )}
                       </dd>
                     </div>
                   </dl>
                   <div className="flex flex-col gap-2 justify-end">
-                    {/* Update cart Button */}
-                    <Button
-                      className="transition hover:opacity-90"
-                      bgColor={"var(--black)"}
-                      width={"100%"}
-                      height={"2.4em"}
-                    >
-                      Update Cart
-                    </Button>
-
                     {/* procced to checkout button */}
                     <Link to={"/checkout"}>
                       <Button

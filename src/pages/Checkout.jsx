@@ -30,7 +30,7 @@ const Checkout = () => {
                 <p className="text-2xl font-medium tracking-tight text-gray-900">
                   <sup>$</sup>
                   {cart.cartItems.reduce(
-                    (total, price) => total + price.price,
+                    (total, price) => total + (price.price * price.qty),
                     0
                   )}
                 </p>
@@ -39,6 +39,7 @@ const Checkout = () => {
                   For the purchase of
                 </p>
               </div>
+             
 
               {cart.cartItems.length !== 0 ? (
                 <div>
