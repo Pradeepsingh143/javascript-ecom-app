@@ -14,6 +14,15 @@ module.exports = {
         'black': 'var(--black)',
       },
     },
+    container:{
+      screens: {
+        sm: '600px',
+        md: '728px',
+        lg: '984px',
+        xl: '1020px',
+        '2xl': '1020px',
+      },
+    }
   },
   plugins: [],
 }

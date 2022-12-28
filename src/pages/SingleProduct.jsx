@@ -147,7 +147,7 @@ const SingleProduct = () => {
                 </>
               ) : (
                 <>
-                  <div className="product-list flex flex-col sm:flex-row flex-wrap gap-6 mt-4">
+                  <div className="product-list flex flex-col sm:flex-row flex-wrap gap-5 mt-4">
                     {relativeProduct &&
                       relativeProduct.map((data) => (
                         <RelativeProductCard
