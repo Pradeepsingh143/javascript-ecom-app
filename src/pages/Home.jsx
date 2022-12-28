@@ -19,7 +19,7 @@ const Home = () => {
         {/* hero section*/}
         {/* # section 1 */}
         <section className="heroSection bg-primary">
-          <div className="container px-4 pt-12 pb-4 min-h-[90vh] flex flex-col gap-8 sm:flex-row mx-auto sm:items-center">
+          <div className="container px-4 sm:px-2 pt-12 pb-4 min-h-[90vh] flex flex-col gap-8 sm:flex-row mx-auto sm:items-center">
             {/* left cloumn */}
             <div className="left w-full sm:w-1/2">
               <Heading
