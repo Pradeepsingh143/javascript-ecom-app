@@ -5,9 +5,10 @@ import {
   SubHeading,
   Paragraph,
 } from "../utils/styledComponents/components";
-import img from "../images/demoimg.jpg";
 import ProdcuctCard from "../components/ProductCard";
 import { useProduct } from "../context/Product.state";
+
+
 
 const Home = () => {
   const productData = useProduct(); 
@@ -15,7 +16,7 @@ const Home = () => {
   return (
     <>
       {/* homepage page */}
-      <main className="homePage">
+      <main className="homePage" title="home-page">
         {/* hero section*/}
         {/* # section 1 */}
         <section className="heroSection bg-primary">
@@ -75,12 +76,13 @@ const Home = () => {
             {/* right column */}
             <div className="right w-full sm:w-1/2 flex justify-end">
               <div className="images grid grid-cols-2 gap-2 w-full sm:w-4/5">
-                <img src={img} alt="" className="h-40 w-full object-cover rounded" />
-                <img src={img} alt="" className="h-40 w-full object-cover rounded" />
+                <img src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392619/cupcakes_gqd30z.jpg" loading="lazy" alt="cupcake" className="h-40 w-full object-cover rounded" />
+                <img src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392619/donuts_m44po9.jpg" loading="lazy" alt="donuts" className="h-40 w-full object-cover rounded" />
                 <div className="col-span-2">
                   <img
-                    src={img}
-                    alt=""
+                    src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392619/pastry_jdffw1.jpg"
+                    alt="pastry"
+                    loading="lazy"
                     className="w-full h-40 object-cover rounded"
                   />
                 </div>
@@ -111,8 +113,9 @@ const Home = () => {
           <div className="container flex flex-col md:flex-row mx-auto px-4 gap-6 md:gap-16 mt-5 md:mt-14 items-center">
             <div className="left-col w-full md:w-1/2">
               <img
-                src={img}
-                alt=""
+                src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392620/hotcake_bszeod.jpg"
+                alt="cheif making hotcakes"
+                loading="lazy"
                 className="w-full md:h-[380px] object-cover"
               />
             </div>

@@ -12,7 +12,7 @@ const Checkout = () => {
 
   return (
     <>
-      <section className="bg-white">
+      <section className="bg-white" title="checkout-page">
         <h1 className="sr-only">Checkout</h1>
 
         <div className="container grid grid-cols-1 mx-auto md:grid-cols-2">

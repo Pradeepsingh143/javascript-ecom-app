@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { FaShopware } from "react-icons/fa";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -23,12 +23,12 @@ const Header = () => {
   }
 
   return (
-    <header className="py-4 bg-primary">
+    <header className="py-4 bg-primary" title="header">
       <div className="navbar px-4">
         <div className="container relative mx-auto flex items-center justify-between">
           {/* website logo */}
           <div className="logo">
-            <Link to={'/'}><FaShopware size={"36px"} color={"white"} /></Link>
+            <Link to={'/'}><FaShopware title="logo" size={"36px"} color={"white"} /></Link>
           </div>
 
           {/* search input bar */}
@@ -75,7 +75,7 @@ const Header = () => {
             <div className="menuIcon relative">
             <button onClick={toggleCart}>
             <h2 className="cursor-pointer">
-                <BsFillCartCheckFill size={"24px"}/>
+                <BsFillCartCheckFill size={"24px"} title="hamburger" />
               </h2>
               <p className="bg-white rounded-full text-center text-xs absolute bottom-4 left-3 w-4">
                 {cartItems.length}

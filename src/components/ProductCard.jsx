@@ -20,7 +20,7 @@ const ProductCard = ({ productId, title, category, price, image }) => {
   
 
   return (
-    <div className="productCard border-2 flex flex-col w-full sm:w-[230px] rounded-md">
+    <div className="productCard border-2 flex flex-col w-full sm:w-[230px] rounded-md" title="product-card">
       <div className="productImg relative">
         <Link to={`/productPage/${productId}/`}>
           <img

@@ -9,8 +9,8 @@ const Cart = () => {
 
   return (
     <>
+      <section className="bg-white" title="cart-page">
       {cart.cartItems.length !== 0 ? (
-        <section className="bg-white">
           <div className="max-w-screen-xl min-h-screen px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8 container">
             <div className="max-w-3xl mx-auto">
               <div className="mt-8">
@@ -137,7 +137,6 @@ const Cart = () => {
               </div>
             </div>
           </div>
-        </section>
       ) : (
         <div className="text-center h-screen flex flex-col justify-center items-center gap-5">
           <h2 className="text-xl">
@@ -161,6 +160,7 @@ const Cart = () => {
           </Link>
         </div>
       )}
+      </section>
     </>
   );
 };

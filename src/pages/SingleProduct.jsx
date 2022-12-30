@@ -46,6 +46,7 @@ const SingleProduct = () => {
 
   return (
     <>
+    <section title="product-page">
       {data ? (
         <>
           {/* hero section*/}
@@ -170,6 +171,7 @@ const SingleProduct = () => {
           <Heading>Page Not Found</Heading>
         </section>
       )}
+      </section>
     </>
   );
 };
