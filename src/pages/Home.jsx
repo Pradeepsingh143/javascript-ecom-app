@@ -76,13 +76,12 @@ const Home = () => {
             {/* right column */}
             <div className="right w-full sm:w-1/2 flex justify-end">
               <div className="images grid grid-cols-2 gap-2 w-full sm:w-4/5">
-                <img src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392619/cupcakes_gqd30z.jpg" loading="lazy" alt="cupcake" className="h-40 w-full object-cover rounded" />
-                <img src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392619/donuts_m44po9.jpg" loading="lazy" alt="donuts" className="h-40 w-full object-cover rounded" />
+                <img src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392619/cupcakes_gqd30z.jpg"  alt="cupcake" className="h-40 w-full object-cover rounded" />
+                <img src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392619/donuts_m44po9.jpg"  alt="donuts" className="h-40 w-full object-cover rounded" />
                 <div className="col-span-2">
                   <img
                     src="https://res.cloudinary.com/dyjzsykk7/image/upload/v1672392619/pastry_jdffw1.jpg"
                     alt="pastry"
-                    loading="lazy"
                     className="w-full h-40 object-cover rounded"
                   />
                 </div>
