@@ -1,27 +1,25 @@
-import React from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+import React, {Suspense, lazy } from "react";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import Loader from "./components/Loader.spinner";
 
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import SingleProduct from "./pages/SingleProduct";
-import Shop from "./pages/Shop";
-import Cart from "./pages/Cart";
-import Checkout from "./pages/Checkout";
-import ProductProvider from "./context/Product.state";
-import GoToTop from "./components/GoToTop";
-
+const Header = lazy(() => import("./components/Header"));
+const Footer = lazy(() => import("./components/Footer"));
+const Home = lazy(() => import("./pages/Home"));
+const SingleProduct = lazy(() => import("./pages/SingleProduct"));
+const Shop = lazy(() => import("./pages/Shop"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Checkout = lazy(() => import("./pages/Checkout"));
+const ProductProvider = lazy(() => import("./context/Product.state"));
+const GoToTop = lazy(() => import("./components/GoToTop"));
 
 function App() {
   const Layout = () => (
     <>
-     <GoToTop />
+      <GoToTop />
       <Header />
+      <Suspense fallback={<Loader />}>
       <Outlet />
+      </Suspense>
       <Footer />
     </>
   );
@@ -55,10 +53,9 @@ function App() {
     },
   ]);
 
-
   return (
     <ProductProvider>
-        <RouterProvider router={Router} />
+      <RouterProvider router={Router} />
     </ProductProvider>
   );
 }
